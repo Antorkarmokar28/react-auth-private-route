@@ -1,5 +1,7 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router";
+import { auth } from "../../firebase/firebase.init";
 
 const Register = () => {
   const handleSignUpForm = (e) => {
@@ -8,6 +10,14 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(name, email, password);
+    // create user with firebase
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div className="container mx-auto mt-6">
