@@ -37,7 +37,7 @@ const Login = () => {
         />
         <p>
           Are you new user? Then Please{" "}
-          <Link className="text-blue-600 font-bold" to="/signup">
+          <Link className="text-blue-600 font-bold" to="/register">
             Sign Up
           </Link>
         </p>
