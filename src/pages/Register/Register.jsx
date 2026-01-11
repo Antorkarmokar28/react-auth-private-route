@@ -1,4 +1,4 @@
-import { FaEye } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import { use, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -7,6 +7,7 @@ const Register = () => {
   const { createUser } = use(AuthContext);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const handleSignUpForm = (e) => {
     e.preventDefault();
     // const name = e.target.name.value;
@@ -48,12 +49,15 @@ const Register = () => {
         <div className="relative">
           <input
             className="w-full p-2 rounded"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
           />
-          <button className="btn btn-sm absolute top-1 right-2">
-            <FaEye />
+          <button
+            onClick={() => setShowPassword(!showPassword)}
+            className="btn btn-sm absolute top-1 right-2"
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
         <label className="label">
