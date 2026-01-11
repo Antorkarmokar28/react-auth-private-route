@@ -1,23 +1,27 @@
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router";
-import { use } from "react";
+import { use, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
   const { createUser } = use(AuthContext);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
   const handleSignUpForm = (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
+    // const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, email, password);
+    setSuccess(false);
+    // clear the error message
+    setError("");
     // create user with firebase
     createUser(email, password)
       .then((result) => {
-        console.log(result);
+        setSuccess(result.user);
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   };
   return (
@@ -69,6 +73,12 @@ const Register = () => {
             Sign In
           </Link>
         </p>
+        {error && <p className="text-red-600 font-bold">{error}</p>}
+        {success && (
+          <p className="text-green-600 font-bold">
+            User register is successfuly
+          </p>
+        )}
       </form>
     </div>
   );
