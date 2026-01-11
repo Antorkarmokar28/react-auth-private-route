@@ -1,9 +1,10 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router";
-import { auth } from "../../firebase/firebase.init";
+import { use } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
+  const { createUser } = use(AuthContext);
   const handleSignUpForm = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -11,7 +12,7 @@ const Register = () => {
     const password = e.target.password.value;
     console.log(name, email, password);
     // create user with firebase
-    createUserWithEmailAndPassword(auth, email, password)
+    createUser(email, password)
       .then((result) => {
         console.log(result);
       })
