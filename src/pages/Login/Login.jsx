@@ -1,11 +1,13 @@
 import { use, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { signInUser } = use(AuthContext);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState("");
   // handle sign in button and sign in function
   const handleSignInForm = (e) => {
     e.preventDefault();
@@ -37,12 +39,20 @@ const Login = () => {
           placeholder="Email"
         />
         <br />
-        <input
-          className="w-full p-2 rounded"
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
+        <div className="relative">
+          <input
+            className="w-full p-2 rounded"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+          />
+          <button
+            onClick={() => setShowPassword(!showPassword)}
+            className="btn btn-sm absolute top-1 right-2"
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
         <br />
         <button className="underline cursor-pointer">Forgot Password</button>
         <br />
