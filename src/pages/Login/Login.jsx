@@ -1,11 +1,27 @@
+import { use, useState } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
+  const { signInUser } = use(AuthContext);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  // handle sign in button and sign in function
   const handleSignInForm = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    // clear the success message and error message
+    setSuccess(false);
+    setError("");
+    // user sign in functionality added
+    signInUser(email, password)
+      .then((result) => {
+        setSuccess(result.user);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
   return (
     <div className="container mx-auto mt-6">
@@ -41,6 +57,12 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
+        {error && <p className="text-red-600 font-bold">{error}</p>}
+        {success && (
+          <p className="text-green-600 font-bold">
+            User sign in is successfuly
+          </p>
+        )}
       </form>
     </div>
   );
