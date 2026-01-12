@@ -42,6 +42,34 @@ const Navbar = () => {
           Register
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "bg-violet-600 text-white px-3 py-1 rounded"
+                : "text-gray-700 px-3 py-1"
+            }
+            to="/order"
+          >
+            Orders
+          </NavLink>
+        </li>
+      )}
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive
+                ? "bg-violet-600 text-white px-3 py-1 rounded"
+                : "text-gray-700 px-3 py-1"
+            }
+            to="/profile"
+          >
+            Profile
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
