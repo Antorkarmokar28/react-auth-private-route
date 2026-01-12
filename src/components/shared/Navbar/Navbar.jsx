@@ -70,6 +70,19 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
+
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "bg-violet-600 text-white px-3 py-1 rounded"
+              : "text-gray-700 px-3 py-1"
+          }
+          to="/dashboard"
+        >
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
 
