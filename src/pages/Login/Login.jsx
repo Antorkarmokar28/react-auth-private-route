@@ -1,5 +1,5 @@
 import { use, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -8,6 +8,7 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState("");
+  const navigate = useNavigate();
   // handle sign in button and sign in function
   const handleSignInForm = (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         setSuccess(result.user);
+        navigate("/");
       })
       .catch((error) => {
         setError(error.message);

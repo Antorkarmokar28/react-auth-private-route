@@ -1,5 +1,5 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { use, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -8,6 +8,7 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const handleSignUpForm = (e) => {
     e.preventDefault();
     // const name = e.target.name.value;
@@ -20,6 +21,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         setSuccess(result.user);
+        navigate("/");
       })
       .catch((error) => {
         setError(error.message);
